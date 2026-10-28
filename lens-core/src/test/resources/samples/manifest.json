@@ -1,0 +1,206 @@
+{
+  "testSuiteTag": "v2026-08-31",
+  "testSuiteCommit": "44c3905c69ca236aa3b94c04be1b7e9bd066ba03",
+  "configurationRelease": "v2026-08-31",
+  "xrechnungVersion": "3.0.2",
+  "validatorVersion": "1.6.3",
+  "fixtures": [
+    {
+      "path": "kosit/business-cases/standard/01.01a-INVOICE_ubl.xml",
+      "upstreamPath": "src/test/business-cases/standard/01.01a-INVOICE_ubl.xml",
+      "sha256": "74fb09c609d5fba15a8c543060998d3b92858f56a81fb5b0ed244d6794e498d1",
+      "kind": "upstream",
+      "expected": {
+        "acceptable": true,
+        "reportValid": true,
+        "messages": [
+          {
+            "code": "BR-DE-TMP-32",
+            "level": "information"
+          }
+        ]
+      }
+    },
+    {
+      "path": "kosit/business-cases/standard/01.01a-INVOICE_uncefact.xml",
+      "upstreamPath": "src/test/business-cases/standard/01.01a-INVOICE_uncefact.xml",
+      "sha256": "727b51982a84c9b406599a7384783570910440ed405c9bb6d918b22442636886",
+      "kind": "upstream",
+      "expected": {
+        "acceptable": true,
+        "reportValid": true,
+        "messages": [
+          {
+            "code": "BR-DE-TMP-32",
+            "level": "information"
+          }
+        ]
+      }
+    },
+    {
+      "path": "kosit/technical-cases/cius/01.01_comprehensive_test_ubl.xml",
+      "upstreamPath": "src/test/technical-cases/cius/01.01_comprehensive_test_ubl.xml",
+      "sha256": "13104371d8445f23e47e375b61a58a05fdce7363626cdd8c9e8819c0bb1ec7ff",
+      "kind": "upstream",
+      "expected": {
+        "acceptable": true,
+        "reportValid": true,
+        "messages": []
+      }
+    },
+    {
+      "path": "kosit/technical-cases/cius/01.01_comprehensive_test_uncefact.xml",
+      "upstreamPath": "src/test/technical-cases/cius/01.01_comprehensive_test_uncefact.xml",
+      "sha256": "655f3d18f71f672b5bd695143e9f59c439f2614ac3d4b1fbdd195993ab7c6c9a",
+      "kind": "upstream",
+      "expected": {
+        "acceptable": true,
+        "reportValid": false,
+        "messages": [
+          {
+            "code": "CII-SR-475",
+            "level": "warning"
+          },
+          {
+            "code": "CII-SR-476",
+            "level": "warning"
+          }
+        ]
+      }
+    },
+    {
+      "path": "kosit/technical-cases/cius/01.05_minimal_test_ubl.xml",
+      "upstreamPath": "src/test/technical-cases/cius/01.05_minimal_test_ubl.xml",
+      "sha256": "db30815f3d29d5acfebb435c6828580a5fc80b0dd07c26ed1203adef2b78f454",
+      "kind": "upstream",
+      "expected": {
+        "acceptable": true,
+        "reportValid": true,
+        "messages": [
+          {
+            "code": "BR-DE-TMP-32",
+            "level": "information"
+          }
+        ]
+      }
+    },
+    {
+      "path": "kosit/technical-cases/cius/01.05_minimal_test_uncefact.xml",
+      "upstreamPath": "src/test/technical-cases/cius/01.05_minimal_test_uncefact.xml",
+      "sha256": "f8f7035ca6ec6c9b9b648028490bce950fb670e3f2eb3b9859680e0b42d846ab",
+      "kind": "upstream",
+      "expected": {
+        "acceptable": true,
+        "reportValid": true,
+        "messages": [
+          {
+            "code": "BR-DE-TMP-32",
+            "level": "information"
+          }
+        ]
+      }
+    },
+    {
+      "path": "derived/missing-bt-10-ubl.xml",
+      "derivedFrom": "kosit/business-cases/standard/01.01a-INVOICE_ubl.xml",
+      "sha256": "46c7b647b50b1f5ebf92a0921448b93e92236d45f90774719ab40ee9b3cd5827",
+      "kind": "derived",
+      "mutation": "missing-bt-10",
+      "expected": {
+        "acceptable": false,
+        "reportValid": false,
+        "messages": [
+          {
+            "code": "BR-DE-15",
+            "level": "error"
+          },
+          {
+            "code": "BR-DE-TMP-32",
+            "level": "information"
+          }
+        ]
+      }
+    },
+    {
+      "path": "derived/incorrect-bt-112-ubl.xml",
+      "derivedFrom": "kosit/business-cases/standard/01.01a-INVOICE_ubl.xml",
+      "sha256": "a1a7cd479c78a7299229c7f78b5d8e0b29298aa036ccdc63a9144f471d217d63",
+      "kind": "derived",
+      "mutation": "incorrect-bt-112",
+      "expected": {
+        "acceptable": false,
+        "reportValid": false,
+        "messages": [
+          {
+            "code": "BR-CO-15",
+            "level": "error"
+          },
+          {
+            "code": "BR-CO-16",
+            "level": "error"
+          },
+          {
+            "code": "BR-DE-TMP-32",
+            "level": "information"
+          }
+        ]
+      }
+    },
+    {
+      "path": "derived/missing-bt-10-uncefact.xml",
+      "derivedFrom": "kosit/business-cases/standard/01.01a-INVOICE_uncefact.xml",
+      "sha256": "de306861e67b043c95fb9944ac19e1db42b2f705042b26c12373e50530c667be",
+      "kind": "derived",
+      "mutation": "missing-bt-10",
+      "expected": {
+        "acceptable": false,
+        "reportValid": false,
+        "messages": [
+          {
+            "code": "BR-DE-15",
+            "level": "error"
+          },
+          {
+            "code": "BR-DE-TMP-32",
+            "level": "information"
+          }
+        ]
+      }
+    },
+    {
+      "path": "derived/incorrect-bt-112-uncefact.xml",
+      "derivedFrom": "kosit/business-cases/standard/01.01a-INVOICE_uncefact.xml",
+      "sha256": "d2be48f5e8e47edabcc824ace256030565c2d55f9fea3f4bc2cbb11d9129def5",
+      "kind": "derived",
+      "mutation": "incorrect-bt-112",
+      "expected": {
+        "acceptable": false,
+        "reportValid": false,
+        "messages": [
+          {
+            "code": "BR-CO-15",
+            "level": "error"
+          },
+          {
+            "code": "BR-CO-16",
+            "level": "error"
+          },
+          {
+            "code": "BR-DE-TMP-32",
+            "level": "information"
+          }
+        ]
+      }
+    }
+  ],
+  "tools": {
+    "validator": {
+      "url": "https://github.com/itplr-kosit/validator/releases/download/v1.6.3/validator-1.6.3-standalone.jar",
+      "sha256": "799e64befca97d4080e03608c80b85dd5a5ecc5f4ae4f35d1116ec2855b9a7c9"
+    },
+    "configuration": {
+      "url": "https://github.com/itplr-kosit/validator-configuration-xrechnung/releases/download/v2026-08-31/xrechnung-3.0.2-validator-configuration-2026-08-31.zip",
+      "sha256": "2530cd107c414511c5d0462ec10f886910395abfca820db82e83d70bf01221a8"
+    }
+  }
+}

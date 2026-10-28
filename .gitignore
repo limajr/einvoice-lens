@@ -1,0 +1,15 @@
+**/target/
+**/node_modules/
+**/src/main/frontend/generated/
+**/frontend/generated/
+**/package.json
+**/package-lock.json
+**/pnpm-lock.yaml
+**/pnpmfile.cjs
+**/vite.generated.ts
+**/tsconfig.json
+**/types.d.ts
+.idea/
+*.iml
+.vscode/
+.DS_Store

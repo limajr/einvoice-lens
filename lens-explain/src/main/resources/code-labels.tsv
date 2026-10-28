@@ -1,0 +1,35 @@
+# Reviewed subset: OpenPeppol 2025-Q4 / UNCL D.16B / UNECE Rec20 revision 11e including Rec21. See CODE_LISTS.md.
+1001	326	Partial invoice	Teilrechnung
+1001	380	Commercial invoice	Handelsrechnung
+1001	381	Credit note	Gutschrift
+1001	384	Corrected invoice	Berichtigte Rechnung
+1001	386	Prepayment invoice	Vorauszahlungsrechnung
+1001	389	Self-billed invoice	Selbst ausgestellte Rechnung
+1001	875	Partial construction invoice	Abschlagsrechnung für Bauleistungen
+1001	876	Partial final construction invoice	Teilschlussrechnung für Bauleistungen
+1001	877	Final construction invoice	Schlussrechnung für Bauleistungen
+4461	10	In cash	Barzahlung
+4461	30	Credit transfer	Überweisung
+4461	48	Bank card	Bankkarte
+4461	49	Direct debit	Lastschrift
+4461	54	Credit card	Kreditkarte
+4461	55	Debit card	Debitkarte
+4461	58	SEPA credit transfer	SEPA-Überweisung
+4461	59	SEPA direct debit	SEPA-Lastschrift
+5305	S	Standard rate	Standardsteuersatz
+5305	Z	Zero rated goods	Nullsteuersatz
+5305	E	Exempt from tax	Steuerbefreit
+5305	AE	VAT reverse charge	Umkehr der Steuerschuldnerschaft
+5305	G	Free export item, VAT not charged	Ausfuhr ohne Umsatzsteuer
+5305	O	Services outside scope of tax	Nicht steuerbare Leistungen
+5305	K	VAT exempt for EEA intra-community supply of goods and services	Steuerfreie innergemeinschaftliche Lieferung oder Leistung
+5305	L	Canary Islands general indirect tax	Kanarische allgemeine indirekte Steuer
+5305	M	Tax for production, services and importation in Ceuta and Melilla	Produktions-, Dienstleistungs- und Einfuhrsteuer in Ceuta und Melilla
+unit	XPP	piece	Stück
+unit	H87	piece	Stück
+unit	C62	unit	Einheit
+unit	KGM	kilogram	Kilogramm
+unit	HUR	hour	Stunde
+unit	LTR	litre	Liter
+unit	MTR	metre	Meter
+unit	DAY	day	Tag

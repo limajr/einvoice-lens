@@ -1,0 +1,247 @@
+# English source key<TAB>project-authored German translation. Invoice values and official rule text are never translated here.
+Language	Sprache
+einvoice-lens · Invoice validation	einvoice-lens · Rechnungsprüfung
+A LITTLE CLARITY GOES A LONG WAY	MEHR KLARHEIT FÜR IHRE E-RECHNUNG
+Check an invoice. Understand the result.	Rechnung prüfen. Ergebnis verstehen.
+Read your XRechnung XML and check it against official rules, on your own instance.	Lesen Sie Ihre XRechnung-XML und prüfen Sie sie mit offiziellen Regeln auf Ihrer eigenen Instanz.
+Choose another file	Andere Datei auswählen
+Try with a sample invoice	Mit einer Beispielrechnung testen
+Try an invalid example	Ungültiges Beispiel testen
+Browse files	Datei auswählen
+or drop your XML here	oder XML-Datei hier ablegen
+Your invoice	Ihre Rechnung
+Upload an XRechnung invoice (UBL or CII).	Laden Sie eine XRechnung hoch (UBL oder CII).
+XML · up to 5 MiB	XML · bis 5 MiB
+No invoice at hand?	Keine Rechnung zur Hand?
+Your instance. Your data.	Ihre Instanz. Ihre Daten.
+Files are checked on this instance. With remote hosting, they are sent to that server.	Dateien werden auf dieser Instanz geprüft. Bei einem entfernten Server werden sie dorthin übertragen.
+Open source on GitHub	Quelloffen auf GitHub
+Checks structure and business rules—not authenticity, payment safety or complete tax compliance.	Prüft Struktur und Geschäftsregeln – nicht Echtheit, Zahlungssicherheit oder vollständige steuerliche Konformität.
+Checking your invoice	Ihre Rechnung wird geprüft
+Running the bundled validation rules…	Die gebündelten Prüfregeln werden ausgeführt…
+Invoice XML	Rechnungs-XML
+Invoice & validation	Rechnung und Prüfung
+Ready when you are	Bereit für Ihre Rechnung
+Add an invoice to read its details, check its status,\nand review the fields that need attention.	Fügen Sie eine Rechnung hinzu, um ihre Angaben zu lesen,\nihren Status zu prüfen und auffällige Felder zu finden.
+XML well-formedness	XML-Wohlgeformtheit
+XML Schema	XML-Schema
+European rules (EN 16931)	Europäische Regeln (EN 16931)
+German rules (XRechnung)	Deutsche Regeln (XRechnung)
+Is the XML well formed?	Ist das XML wohlgeformt?
+Does its structure match the schema?	Entspricht die Struktur dem Schema?
+Does it follow European invoice rules?	Erfüllt es die europäischen Rechnungsregeln?
+Does it meet German invoice rules?	Erfüllt es die deutschen Rechnungsregeln?
+Upload not checked	Datei nicht geprüft
+Valid	Gültig
+Valid with warnings	Gültig mit Warnungen
+Invalid	Ungültig
+Unsupported format or profile	Format oder Profil nicht unterstützt
+Validation incomplete	Prüfung unvollständig
+VALIDATION RESULT	PRÜFERGEBNIS
+Invoice	Rechnung
+Validation	Prüfung
+Passed	Bestanden
+Failed	Fehlgeschlagen
+Not run	Nicht ausgeführt
+Information	Hinweis
+Warnings	Warnungen
+{0} error	{0} Fehler
+{0} errors	{0} Fehler
+{0} warning	{0} Warnung
+{0} warnings	{0} Warnungen
+{0} informational finding	{0} Hinweis
+{0} informational findings	{0} Hinweise
+Invoice rule validation was not completed.	Die Rechnungsprüfung wurde nicht vollständig ausgeführt.
+Detected syntax: {0}	Erkannte Syntax: {0}
+Declared profile: {0}	Angegebenes Profil: {0}
+Validation details	Prüfdetails
+All checks passed. No findings to review.	Alle Prüfungen bestanden. Es liegen keine Meldungen vor.
+Findings	Meldungen
+Show findings	Meldungen anzeigen
+All findings	Alle Meldungen
+Errors only	Nur Fehler
+Warnings only	Nur Warnungen
+Information only	Nur Hinweise
+No findings in this category.	Keine Meldungen in dieser Kategorie.
+Error	Fehler
+Warning	Warnung
+View {0}	{0} anzeigen
+Official rule text	Offizieller Regeltext
+Suggested action	Empfohlener nächster Schritt
+Rule source	Regelquelle
+No plain-language explanation is available for this rule yet.	Für diese Regel liegt noch keine Erklärung in verständlicher Sprache vor.
+XML location	XML-Fundstelle
+Showing the first {0} of {1} findings in this category.	Die ersten {0} von {1} Meldungen dieser Kategorie werden angezeigt.
+Choose an XML file of at most 5 MiB and try again.	Wählen Sie eine XML-Datei mit höchstens 5 MiB und versuchen Sie es erneut.
+The sample could not be checked. Please try uploading an XML file.	Das Beispiel konnte nicht geprüft werden. Laden Sie stattdessen eine XML-Datei hoch.
+The sample could not be read.	Das Beispiel konnte nicht gelesen werden.
+Accepted by the bundled rules. Informational findings may still be present.	Von den gebündelten Regeln akzeptiert. Es können weiterhin Hinweise vorliegen.
+Accepted by the bundled rules, with warnings to review.	Von den gebündelten Regeln akzeptiert. Bitte prüfen Sie die Warnungen.
+The document was rejected by the bundled rules. Review the findings below.	Das Dokument wurde von den gebündelten Regeln abgelehnt. Prüfen Sie die folgenden Meldungen.
+Some checks did not complete. No valid verdict is available.	Einige Prüfungen wurden nicht abgeschlossen. Es liegt kein gültiges Prüfurteil vor.
+Only standard XRechnung 3.0 UBL Invoice and CII XML are supported. No invoice rules were run.	Unterstützt werden Standard-XRechnungen 3.0 als UBL Invoice oder CII-XML. Es wurden keine Rechnungsregeln ausgeführt.
+Choose a non-empty XML file of at most 5 MiB.	Wählen Sie eine nicht leere XML-Datei mit höchstens 5 MiB.
+XML is malformed or uses a prohibited feature (DTD, external schema hints, processing instructions, or excessive structure).	Das XML ist fehlerhaft oder verwendet eine nicht erlaubte Funktion (DTD, externe Schemahinweise, Verarbeitungsanweisungen oder eine übermäßig komplexe Struktur).
+XML inspection could not complete.	Die XML-Untersuchung konnte nicht abgeschlossen werden.
+Validation could not complete. No valid verdict is available.	Die Prüfung konnte nicht abgeschlossen werden. Es liegt kein gültiges Prüfurteil vor.
+Validation could not complete.	Die Prüfung konnte nicht abgeschlossen werden.
+The validator is busy. Please try again after the current check finishes.	Die Prüfinstanz ist ausgelastet. Versuchen Sie es nach Abschluss der aktuellen Prüfung erneut.
+The validation deadline was reached. No valid verdict is available.	Die maximale Prüfzeit wurde erreicht. Es liegt kein gültiges Prüfurteil vor.
+Validation was interrupted.	Die Prüfung wurde unterbrochen.
+The uploaded file could not be read.	Die hochgeladene Datei konnte nicht gelesen werden.
+Invoice reading could not complete.	Die Rechnungsansicht konnte nicht erstellt werden.
+Invoice view unavailable	Rechnungsansicht nicht verfügbar
+A readable view is available for standard XRechnung 3.0 UBL Invoice and CII XML.	Eine lesbare Ansicht ist für Standard-XRechnungen 3.0 als UBL Invoice oder CII-XML verfügbar.
+The XML could not be read safely. Review the validation results for details.	Das XML konnte nicht sicher gelesen werden. Einzelheiten finden Sie im Prüfergebnis.
+Not determined	Nicht ermittelt
+Unknown	Unbekannt
+UBL Invoice	UBL-Rechnung
+XRechnung 3.0.2 · KoSIT configuration of 2026-08-31 · EN 16931 1.3.16	XRechnung 3.0.2 · KoSIT-Konfiguration vom 31.08.2026 · EN 16931 1.3.16
+Display format	Anzeigeformat
+Formats amounts and dates; the language selector controls labels.	Formatiert Beträge und Datumsangaben; die Sprachauswahl steuert die Bezeichnungen.
+INVOICE	RECHNUNG
+Values from the XML · {0}	Angaben aus dem XML · {0}
+AMOUNT DUE · BT-115	FÄLLIGER BETRAG · BT-115
+As stated in the invoice	Wie in der Rechnung angegeben
+Some values need attention	Einige Angaben müssen geprüft werden
+Invoice lines ({0})	Rechnungspositionen ({0})
+No invoice lines were provided.	Es wurden keine Rechnungspositionen angegeben.
+Item	Artikel
+Quantity	Menge
+Net unit price	Nettopreis je Einheit
+VAT	Umsatzsteuer
+Net amount	Nettobetrag
+Details	Details
+Line details	Positionsdetails
+Scroll the table horizontally to see all columns on a smaller screen.	Auf kleinen Bildschirmen können Sie die Tabelle horizontal verschieben, um alle Spalten zu sehen.
+Document allowances and charges ({0})	Nachlässe und Zuschläge der Rechnung ({0})
+VAT breakdown	Umsatzsteueraufschlüsselung
+No VAT breakdown was provided.	Es wurde keine Umsatzsteueraufschlüsselung angegeben.
+Invoice totals	Rechnungssummen
+Amounts are formatted without changing their value. Hover over a value to see the original XML text.	Beträge werden ohne Wertänderung formatiert. Bewegen Sie den Zeiger über einen Wert, um den Originalwert aus dem XML zu sehen.
+Payment details	Zahlungsangaben
+No payment instructions were provided.	Es wurden keine Zahlungsanweisungen angegeben.
+Delivery and invoicing period	Lieferdatum und Abrechnungszeitraum
+Invoice notes	Rechnungshinweise
+Note subject code	Betreffcode des Rechnungshinweises
+Invoice note	Rechnungshinweis
+Supporting documents: {0}. Attachments are not opened or downloaded in this preview.	Rechnungsbegründende Dokumente: {0}. Anhänge werden in dieser Vorschau nicht geöffnet oder heruntergeladen.
+This view covers the main invoice fields. Additional XML fields may be present.	Diese Ansicht zeigt die wichtigsten Rechnungsfelder. Das XML kann weitere Angaben enthalten.
+Copy	Kopieren
+Copy IBAN	IBAN kopieren
+Copied	Kopiert
+Copy failed	Kopieren fehlgeschlagen
+unrecognized value	nicht lesbarer Wert
+XML value	XML-Wert
+(missing)	(fehlt)
+Unit/currency code	Einheiten-/Währungscode
+Unit code	Einheitencode
+✓ Line totals consistent	✓ Positionssummen stimmen überein
+! Line totals differ	! Positionssummen weichen ab
+Line comparison unavailable	Positionssummen nicht vergleichbar
+Line sum: {0} · Stated line subtotal: {1}	Summe der Positionen: {0} · Angegebene Zwischensumme: {1}
+Display check	Zusätzliche Anzeigeprüfung
+The official validation result is unchanged.	Das offizielle Prüfergebnis bleibt unverändert.
+Exact sum of line net amounts (BT-131) compared with the stated line subtotal (BT-106). No rounding or correction.	Exakte Summe der Positionsnettobeträge (BT-131) im Vergleich zur angegebenen Positionsnettosumme (BT-106). Keine Rundung oder Korrektur.
+A reliable line subtotal comparison needs unambiguous amounts and a known currency.	Für einen verlässlichen Vergleich werden eindeutige Beträge und eine bekannte Währung benötigt.
+One or more line net amounts are missing, malformed, or use another currency.	Mindestens ein Positionsnettobetrag fehlt, ist nicht lesbar oder verwendet eine andere Währung.
+Payment option {0}	Zahlungsoption {0}
+Adjustment (unknown indicator: {0})	Zu- oder Abschlag (unbekanntes Kennzeichen: {0})
+{0} ({1}) could not be interpreted; the original value is displayed.	{0} ({1}) konnte nicht interpretiert werden; der Originalwert wird angezeigt.
+{0} ({1}) occurs more than once; the first value is displayed.	{0} ({1}) ist mehrfach vorhanden; der erste Wert wird angezeigt.
+An allowance/charge indicator could not be interpreted; its values are shown without assigning business terms.	Ein Kennzeichen für Zu- oder Abschläge konnte nicht interpretiert werden; die Werte werden ohne Zuordnung zu Geschäftsbegriffen angezeigt.
+Sample · {0}	Beispiel · {0}
+Remove	Entfernen
+Retry	Erneut versuchen
+Start	Starten
+Too many files.	Zu viele Dateien.
+File is too large.	Die Datei ist zu groß.
+Incorrect file type.	Nicht unterstützter Dateityp.
+Connecting…	Verbindung wird hergestellt…
+Stalled	Übertragung angehalten
+Processing…	Wird verarbeitet…
+Queued	Wartet
+Server unavailable	Server nicht erreichbar
+Upload failed	Hochladen fehlgeschlagen
+Upload forbidden	Hochladen nicht erlaubt
+Invoice number	Rechnungsnummer
+Issue date	Rechnungsdatum
+Document type code	Dokumentart
+Currency	Währung
+Due date	Fälligkeitsdatum
+Buyer reference	Käuferreferenz
+Purchase order reference	Bestellreferenz
+Contract reference	Vertragsreferenz
+Project reference	Projektreferenz
+Seller	Verkäufer
+Buyer	Käufer
+Name	Name
+Trading name	Handelsname
+Address	Adresse
+Address line 2	Adresszeile 2
+Address line 3	Adresszeile 3
+Postal code	Postleitzahl
+City	Ort
+Region	Region
+Country	Land
+VAT identifier	Umsatzsteuer-ID
+Legal registration identifier	Registernummer
+Electronic address	Elektronische Adresse
+Contact	Ansprechpartner
+Telephone	Telefon
+Email	E-Mail
+Tax registration identifier	Steuernummer
+Identifier	Kennung
+Line identifier	Positionsnummer
+Item name	Artikelname
+Description	Beschreibung
+Price base quantity	Preisbasis-Menge
+Line net amount	Positionsnettobetrag
+Line note	Positionshinweis
+Seller item identifier	Artikelnummer des Verkäufers
+Buyer item identifier	Artikelnummer des Käufers
+Line period start	Beginn des Positionszeitraums
+Line period end	Ende des Positionszeitraums
+Line VAT	Umsatzsteuer der Position
+VAT category	Umsatzsteuerkategorie
+VAT rate	Umsatzsteuersatz
+Taxable amount	Steuerbemessungsgrundlage
+VAT amount	Umsatzsteuerbetrag
+Exemption reason	Befreiungsgrund
+Exemption reason code	Code des Befreiungsgrunds
+Sum of line net amounts	Summe der Positionsnettobeträge
+Document allowances	Nachlässe der Rechnung
+Document charges	Zuschläge der Rechnung
+Total excluding VAT	Gesamtbetrag ohne Umsatzsteuer
+Total including VAT	Gesamtbetrag mit Umsatzsteuer
+Amount already paid	Bereits gezahlter Betrag
+Rounding amount	Rundungsbetrag
+Amount due	Fälliger Betrag
+Total VAT	Gesamte Umsatzsteuer
+VAT in accounting currency	Umsatzsteuer in Buchungswährung
+Payment means code	Zahlungsart
+Payment means text	Beschreibung der Zahlungsart
+Payment account / IBAN	Zahlungskonto / IBAN
+Account name	Kontoinhaber
+BIC / institution identifier	BIC / Bankkennung
+Card account number	Kartennummer
+Cardholder name	Karteninhaber
+Debited account / IBAN	Belastetes Konto / IBAN
+Payment reference	Verwendungszweck
+Mandate reference	Mandatsreferenz
+Payee name	Zahlungsempfänger
+Creditor identifier	Gläubigerkennung
+Payment terms	Zahlungsbedingungen
+Payment terms and payee	Zahlungsbedingungen und Empfänger
+Delivery date	Lieferdatum
+Invoicing period start	Beginn des Abrechnungszeitraums
+Invoicing period end	Ende des Abrechnungszeitraums
+Charge	Zuschlag
+Allowance	Nachlass
+Amount	Betrag
+Base amount	Grundbetrag
+Percentage	Prozentsatz
+Reason	Grund
+Reason code	Code des Grunds
+Remaining time:	Verbleibende Zeit:
+Unknown remaining time	Verbleibende Zeit unbekannt
