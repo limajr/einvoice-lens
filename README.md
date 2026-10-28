@@ -12,6 +12,10 @@ cover the current sample findings, including missing buyer references and incons
 totals. The unchanged official rule text remains expandable below each explanation.
 Unknown rules fall back explicitly. Report export remains planned.
 
+![Validation view showing a missing buyer reference, a plain-language explanation, suggested action and the original official rule text](docs/images/validation-preview.jpg)
+
+*The bundled invalid sample: understand the finding and see what to correct.*
+
 ## Run locally
 
 Requires JDK 21. The Maven wrapper downloads Maven on first use. Frontend development
