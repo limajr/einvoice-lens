@@ -1,0 +1,81 @@
+name: Bug report
+description: Something in einvoice-lens does not work as expected.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Never paste or attach real invoice data. Removing a name alone does not anonymize an
+        invoice: addresses, account numbers, tax IDs, references and embedded attachments can
+        identify people or businesses. Use a file from the
+        [Sample folder](https://github.com/limajr/einvoice-lens/tree/main/Sample) or a minimal
+        synthetic invoice.
+
+        Security issues belong in a private report, not here. See the
+        [security policy](https://github.com/limajr/einvoice-lens/security/policy).
+  - type: checkboxes
+    id: data
+    attributes:
+      label: Invoice data
+      options:
+        - label: This report contains no real invoice data.
+          required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Shown in the application footer, or the release tag you built.
+      placeholder: v0.2.1
+    validations:
+      required: true
+  - type: dropdown
+    id: run
+    attributes:
+      label: How do you run it?
+      options:
+        - Development mode (spring-boot:run)
+        - Production jar (java -jar)
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: syntax
+    attributes:
+      label: Invoice syntax
+      options:
+        - UBL Invoice
+        - CII
+        - Other or unsupported
+        - Not invoice-related
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened?
+      description: Include the verdict and any rule IDs shown, for example BR-DE-15.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Name the sample file you used, or attach a synthetic invoice.
+      placeholder: |
+        1. Upload Sample/invalid-missing-buyer-reference-ubl.xml
+        2. Open the Validation tab
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant log output. Remove any invoice values first.
+      render: text

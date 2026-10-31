@@ -1,0 +1,46 @@
+name: Explanation request
+description: Ask for a plain-language explanation of a validation rule.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Explanations are written per rule and pinned to one rule-bundle version, citing the
+        official rule text. See the
+        [explanation provenance](https://github.com/limajr/einvoice-lens/blob/main/lens-explain/src/main/resources/EXPLANATIONS.md)
+        for the current catalog. Never paste or attach real invoice data.
+  - type: checkboxes
+    id: data
+    attributes:
+      label: Invoice data
+      options:
+        - label: This request contains no real invoice data.
+          required: true
+  - type: input
+    id: rule
+    attributes:
+      label: Rule ID
+      placeholder: BR-DE-15
+    validations:
+      required: true
+  - type: input
+    id: bundle
+    attributes:
+      label: Rule-bundle version
+      description: Shown in the rule-version tooltip of the application.
+      placeholder: XRechnung 3.0.2 / 2026-08-31
+    validations:
+      required: true
+  - type: textarea
+    id: message
+    attributes:
+      label: Official rule message
+      description: The original validator message as shown under the finding.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: What was unclear?
+      description: What you needed to understand or correct. A link to the official rule source helps.
