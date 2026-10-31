@@ -18,3 +18,23 @@ jobs:
         with:
           node-version: '24'
       - run: ./mvnw -B -ntp -Pproduction verify
+      - name: Production jar excludes dev tooling
+        run: |
+          if unzip -l lens-app/target/lens-app-*.jar | grep 'BOOT-INF/lib/vaadin-dev'; then
+            echo "::error::Vaadin dev tooling is packaged in the production jar"
+            exit 1
+          fi
+      - name: Development mode starts
+        run: |
+          ./mvnw -B -ntp install -DskipTests
+          ./mvnw -B -ntp -pl lens-app spring-boot:run > dev-run.log 2>&1 &
+          for i in $(seq 1 120); do
+            if curl -sf -o /dev/null http://localhost:8080/; then
+              echo "Development mode is up"
+              exit 0
+            fi
+            sleep 1
+          done
+          cat dev-run.log
+          echo "::error::Development mode did not start"
+          exit 1
