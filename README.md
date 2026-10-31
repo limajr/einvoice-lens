@@ -3,7 +3,7 @@
 Understand German e-invoices and their validation errors—with readable invoices,
 clear explanations, and local processing.
 
-**Status: readable invoices, explanations and bilingual UI · 0.2.0-SNAPSHOT.** Upload an XRechnung XML
+**Status: readable invoices, explanations and bilingual UI · v0.2.0.** Upload an XRechnung XML
 or try a bundled sample. The **Invoice** tab shows parties, dates, lines, VAT,
 allowances/charges, supplied totals and payment details. The **Validation** tab keeps
 rule findings, severity filters and XML locations. Where a business term has one clear
@@ -39,7 +39,7 @@ To build and run a self-contained production application:
 
 ```sh
 ./mvnw -Pproduction verify
-java -jar lens-app/target/lens-app-0.2.0-SNAPSHOT.jar
+java -jar lens-app/target/lens-app-0.2.0.jar
 ```
 
 ## Try sample invoices

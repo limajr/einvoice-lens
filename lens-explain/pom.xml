@@ -4,7 +4,7 @@
   <parent>
     <groupId>io.github.einvoicelens</groupId>
     <artifactId>einvoice-lens</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.2.0</version>
   </parent>
   <artifactId>lens-explain</artifactId>
   <dependencies>

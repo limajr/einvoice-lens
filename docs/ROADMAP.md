@@ -21,7 +21,7 @@ periods and notes. Preserve raw values, decimal scale and malformed/missing fiel
 Support repeated payment options and multiple VAT currencies. Link findings to scalar
 business terms when the target is unambiguous. See INVOICE_READER.md for exact scope.
 
-The development version is 0.2.0-SNAPSHOT; see CHANGELOG.md. No release has been published.
+The current release is v0.2.0; see CHANGELOG.md.
 The original version-based PDF plan has moved later to give this reader its own release.
 
 ## M4 — explanations and bilingual UI (initial catalog implemented)

@@ -1,8 +1,8 @@
 # Changelog
 
-## v0.2.0 — unreleased
+## v0.2.0 — 2026-10-31
 
-The working version is `0.2.0-SNAPSHOT`. No release tag or GitHub release has been published.
+First published release.
 
 ### Read an invoice alongside its validation result
 
