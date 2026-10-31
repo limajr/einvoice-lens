@@ -9,7 +9,7 @@
   </parent>
   <groupId>io.github.einvoicelens</groupId>
   <artifactId>einvoice-lens</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1</version>
   <packaging>pom</packaging>
   <name>einvoice-lens</name>
   <description>Understand German e-invoices and their validation errors.</description>

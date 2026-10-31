@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.1 — 2026-10-31
+
+### Fixed
+
+- `./mvnw -pl lens-app spring-boot:run` failed with `'vaadin-dev-server' not found`:
+  Vaadin 25's Spring Boot starter no longer brings development-mode tooling. `vaadin-dev`
+  is now an optional dependency, so development runs have it and the production jar does not.
+- CI now checks that development mode starts and that the production jar excludes
+  Vaadin development tooling.
+
 ## v0.2.0 — 2026-10-31
 
 First published release.
