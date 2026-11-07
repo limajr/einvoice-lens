@@ -73,6 +73,7 @@ body { margin: 0; }
 .check-outcome { font-size: 10px; color: #627582; }
 .technical-details { font-size: 12px; border-bottom: 1px solid #e7edef; padding-bottom: 16px; margin: 0; }
 .validation-metadata p { margin: 6px 0; }
+.report-export { display: inline-block; margin: 14px 0; color: #0d665d; font-weight: 650; }
 .code-path { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; white-space: pre-wrap; color: #526b78; }
 .findings-heading { margin-top: 24px; }
 .count-badge { padding: 2px 7px; font-size: 11px; font-weight: 700; background: #edf2f4; border-radius: 5px; color: #5a7180; }

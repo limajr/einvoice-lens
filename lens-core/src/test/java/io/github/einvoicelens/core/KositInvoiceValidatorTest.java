@@ -68,6 +68,16 @@ class KositInvoiceValidatorTest {
         assertTrue(result.findings().isEmpty());
     }
 
+    @Test void facturxEn16931UsesOnlyThePinnedEuropeanRules() throws Exception {
+        String cii = new String(sample("kosit/business-cases/standard/01.01a-INVOICE_uncefact.xml"), StandardCharsets.UTF_8)
+                .replace(XmlPreflight.PROFILE, "urn:factur-x.eu:1p0:en16931");
+        var result = validate(cii);
+        assertNotEquals(ValidationStatus.UNSUPPORTED, result.status(), result.toString());
+        assertTrue(result.rulesApplied());
+        assertEquals(3, result.checks().size());
+        assertEquals("urn:factur-x.eu:1p0:en16931", result.declaredProfile());
+    }
+
     @Test void arbitraryXmlIsUnsupported() {
         assertEquals(ValidationStatus.UNSUPPORTED, validate("<invoice/>").status());
     }

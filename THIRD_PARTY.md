@@ -11,6 +11,7 @@ Review and package the complete runtime license/notice inventory before distribu
 | ArchUnit | Tests only | [Apache-2.0](https://github.com/TNG/ArchUnit/blob/main/LICENSE) |
 | JUnit | Tests only | [EPL-2.0](https://github.com/junit-team/junit-framework/blob/main/LICENSE.md) |
 | Maven Wrapper | Build scripts | Apache-2.0 notices in generated scripts |
+| Apache PDFBox 3.0.4 | Embedded PDF attachment extraction | [Apache-2.0](https://github.com/apache/pdfbox/blob/3.0.4/LICENSE.txt) |
 
 The selected KoSIT XRechnung test-suite fixtures and derived mutations are Apache-2.0.
 Two copies are also bundled for the one-click UI demos, with their license and

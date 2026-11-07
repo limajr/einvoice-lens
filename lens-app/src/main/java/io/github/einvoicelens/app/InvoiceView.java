@@ -17,6 +17,7 @@ import java.util.concurrent.CompletableFuture;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.UploadI18N;
 import io.github.einvoicelens.explain.ExplanationCatalog;
+import io.github.einvoicelens.explain.HtmlValidationReport;
 import java.util.ArrayList;
 import java.util.Set;
 import com.vaadin.flow.router.PageTitle;
@@ -27,6 +28,9 @@ import io.github.einvoicelens.core.*;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.nio.charset.StandardCharsets;
+import java.io.ByteArrayInputStream;
+import com.vaadin.flow.server.StreamResource;
 
 @Route("")
 @PageTitle("einvoice-lens · Invoice validation")
@@ -100,7 +104,7 @@ public class InvoiceView extends Div {
             }
         });
         upload.addClassName("invoice-upload");
-        upload.setAcceptedFileTypes(".xml");
+        upload.setAcceptedFileTypes(".xml", ".pdf", "application/pdf", "text/xml", "application/xml");
         upload.setMaxFiles(1);
         upload.setMaxFileSize(KositInvoiceValidator.MAX_BYTES);
         var browse = new Button("Browse files");
@@ -111,7 +115,7 @@ public class InvoiceView extends Div {
         upload.setDropLabelIcon(symbol("↑", "upload-arrow"));
         upload.addFileRemovedListener(event -> reset());
         upload.addFileRejectedListener(event -> clearWithMessage(event.getErrorMessage()));
-        upload.addFailedListener(event -> clearWithMessage("Choose an XML file of at most 5 MiB and try again."));
+        upload.addFailedListener(event -> clearWithMessage("Choose an XML or PDF file of at most 5 MiB and try again."));
         clear.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         clear.addClassName("clear-button");
         clear.addClickListener(event -> { reset(); upload.clearFileList(); });
@@ -128,13 +132,13 @@ public class InvoiceView extends Div {
 
         var uploadHeading = new Div(text("01", "section-number"), h2("Your invoice"));
         uploadHeading.addClassName("section-heading");
-        var formats = new Div(text("UBL", "format-chip"), text("CII", "format-chip"), text("XML · up to 5 MiB", "file-limit"));
+        var formats = new Div(text("UBL", "format-chip"), text("CII", "format-chip"), text("XML or Factur-X PDF · up to 5 MiB", "file-limit"));
         formats.addClassName("format-list");
         var localNote = new Div(symbol("✓", "local-check"),
                 paragraph("Your instance. Your data.", "local-title"),
                 paragraph("Files are checked on this instance. With remote hosting, they are sent to that server.", "small muted"));
         localNote.addClassName("local-note");
-        var sidebar = new Aside(uploadHeading, paragraph("Upload an XRechnung invoice (UBL or CII).", "muted"),
+        var sidebar = new Aside(uploadHeading, paragraph("Upload an XRechnung XML or a Factur-X / ZUGFeRD PDF.", "muted"),
                 upload, formats, clear, samples, localNote);
         sidebar.addClassName("upload-panel");
         var workspace = new Main(sidebar, results);
@@ -337,6 +341,13 @@ public class InvoiceView extends Div {
         var technical = new Details(ui.t("Validation details"), metadata);
         technical.addClassName("technical-details");
         validation.add(technical);
+
+        var resource = new StreamResource("validation-report.html", () -> new ByteArrayInputStream(
+                HtmlValidationReport.render(fileName, report, ui.locale()).getBytes(StandardCharsets.UTF_8)));
+        var export = new Anchor(resource, ui.t("Download HTML report"));
+        export.getElement().setAttribute("download", true);
+        export.addClassName("report-export");
+        validation.add(export);
 
         if (report.findings().isEmpty()) {
             if (report.status() == ValidationStatus.VALID) {

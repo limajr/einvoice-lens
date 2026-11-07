@@ -20,6 +20,7 @@ public final class KositInvoiceValidator implements InvoiceValidator, AutoClosea
     private static final String REPORT_NS = "http://www.xoev.de/de/validator/varl/1";
     private final BundledRules rules;
     private final DefaultCheck check;
+    private final DefaultCheck facturxEn16931Check;
 
     public KositInvoiceValidator() throws Exception {
         rules = new BundledRules();
@@ -43,6 +44,9 @@ public final class KositInvoiceValidator implements InvoiceValidator, AutoClosea
             var config = Configuration.load(rules.directory().resolve("scenarios.xml").toUri(), rules.directory().toUri())
                     .setResolvingStrategy(strategy).build(processor);
             check = new DefaultCheck(processor, config);
+            var facturxConfig = Configuration.load(rules.facturxScenarios().toUri(), rules.directory().toUri())
+                    .setResolvingStrategy(strategy).build(processor);
+            facturxEn16931Check = new DefaultCheck(processor, facturxConfig);
         } catch (Exception e) {
             rules.close();
             throw e;
@@ -63,13 +67,18 @@ public final class KositInvoiceValidator implements InvoiceValidator, AutoClosea
         } catch (Exception e) {
             return ValidationReport.stopped(ValidationStatus.INCOMPLETE, "PARSER", "XML inspection could not complete.");
         }
-        if (detected.syntax().equals("Unknown") || !detected.profile().equals(XmlPreflight.PROFILE)) {
+        boolean xrechnung = detected.profile().equals(XmlPreflight.PROFILE);
+        boolean facturxEn16931 = isFacturxEn16931(detected);
+        if (detected.syntax().equals("Unknown") || (!xrechnung && !facturxEn16931)) {
+            String profile = detected.profile().toLowerCase(java.util.Locale.ROOT);
+            boolean facturx = profile.contains("factur-x") || profile.contains("zugferd");
             return new ValidationReport(ValidationStatus.UNSUPPORTED,
-                    "Only standard XRechnung 3.0 UBL Invoice and CII XML are supported. No invoice rules were run.",
+                    facturx ? "This Factur-X / ZUGFeRD profile is not checkable with the bundled rules. No invoice rules were run."
+                            : "Only standard XRechnung 3.0 and Factur-X / ZUGFeRD EN 16931 XML are checkable. No invoice rules were run.",
                     detected.syntax(), detected.profile(), List.of(), List.of(), false);
         }
         try {
-            var result = check.checkInput(InputFactory.read(xml, "invoice.xml"));
+            var result = (facturxEn16931 ? facturxEn16931Check : check).checkInput(InputFactory.read(xml, "invoice.xml"));
             if (!result.isProcessingSuccessful() || result.getReportDocument() == null) {
                 return ValidationReport.stopped(ValidationStatus.INCOMPLETE, "VALIDATOR", "Validation could not complete. No valid verdict is available.");
             }
@@ -89,8 +98,8 @@ public final class KositInvoiceValidator implements InvoiceValidator, AutoClosea
             }
             var checks = new ArrayList<ValidationReport.Check>();
             var steps = elements(document.getDocumentElement(), "validationStepResult");
-            var ids = List.of("val-xml", "val-xsd", "val-sch.1", "val-sch.2");
-            var names = ValidationReport.CHECK_NAMES;
+            var ids = facturxEn16931 ? List.of("val-xml", "val-xsd", "val-sch.1") : List.of("val-xml", "val-xsd", "val-sch.1", "val-sch.2");
+            var names = facturxEn16931 ? ValidationReport.CHECK_NAMES.subList(0, 3) : ValidationReport.CHECK_NAMES;
             for (int i = 0; i < ids.size(); i++) {
                 String outcome = "Not run";
                 int errors = 0, warnings = 0, information = 0;
@@ -124,6 +133,12 @@ public final class KositInvoiceValidator implements InvoiceValidator, AutoClosea
         } catch (RuntimeException e) {
             return ValidationReport.stopped(ValidationStatus.INCOMPLETE, "VALIDATOR", "Validation could not complete. No valid verdict is available.");
         }
+    }
+
+    private static boolean isFacturxEn16931(XmlPreflight.Detected detected) {
+        String profile = detected.profile().toLowerCase(java.util.Locale.ROOT);
+        return detected.syntax().equals("CII") && profile.contains("en16931")
+                && (profile.contains("factur-x") || profile.contains("zugferd"));
     }
 
     private static List<Element> elements(org.w3c.dom.Node node, String name) {

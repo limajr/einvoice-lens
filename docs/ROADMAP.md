@@ -36,14 +36,14 @@ severity counts and distinguish failures, warnings, information, passes and not-
 ## Next — catalog coverage and distribution
 
 Expand the reviewed explanation catalog beyond the seven initial rules. Expand field links where XPath locations can be mapped reliably, including
-line-specific findings. Add HTML validation reports, Docker packaging, a full runtime
+line-specific findings. Add Docker packaging, a full runtime
 notice inventory and offline runtime verification before public distribution. Collect
 feedback on whether users can understand and communicate an invoice error.
 
 ## Later
 
-ZUGFeRD/Factur-X extraction, profile handling and separately reported PDF/A conformance;
-bounded attachment downloads. Other candidates: CLI, batch processing, PDF reports and
+Separately reported PDF/A conformance and bounded attachment downloads. Other candidates:
+CLI, batch processing, PDF reports and
 additional rule bundles. Independent totals recomputation needs a specified rounding
 policy and its own corpus. Invoice creation remains outside current scope.
 

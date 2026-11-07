@@ -55,8 +55,12 @@ invoices. Its guide lists the expected verdict and rule IDs for each file.
 ## Supported scope
 
 Standard XRechnung 3.0 UBL Invoice and CII XML are checked with KoSIT Validator 1.6.3
-and configuration 3.0.2 / 2026-08-31 (EN16931 1.3.16). Other profiles, extensions,
-UBL CreditNote and PDFs are unsupported. If a recognized syntax has a missing profile,
+and configuration 3.0.2 / 2026-08-31 (EN16931 1.3.16). Factur-X / ZUGFeRD PDFs are
+accepted when they contain exactly one safe embedded CII XML. Their EN 16931 profile is
+checked against the pinned EN 16931 rules; XRechnung is checked with the existing
+XRechnung path. MINIMUM, BASIC WL, BASIC, EXTENDED, unknown profiles, and PDFs without
+one safe XML attachment are reported as not checkable. PDF/A conformance is not checked
+or claimed. If a recognized syntax has a missing profile,
 the reader can still show partial data while rule validation remains unsupported.
 
 The reader preserves source amounts and decimal precision, displays missing fields,
@@ -80,8 +84,10 @@ unknown codes remain visible. See [code-list sources](lens-explain/src/main/reso
 The readable view covers the main invoice fields, not every EN16931 term. Supporting
 documents are counted but attachments are not opened or downloaded. See the
 [reader scope and field mapping](docs/INVOICE_READER.md), [roadmap](docs/ROADMAP.md) and
-[v0.2.0 release notes](CHANGELOG.md). ZUGFeRD/Factur-X PDFs, a larger explanation catalog, HTML reports and Docker packaging
-remain later work. See [explanation provenance](lens-explain/src/main/resources/EXPLANATIONS.md).
+[v0.2.0 release notes](CHANGELOG.md). Download an HTML validation report to send the
+verdict, findings, explanations, official rule text, and pinned rule provenance to a
+supplier. PDF report generation, a larger explanation catalog and Docker packaging remain
+later work. See [explanation provenance](lens-explain/src/main/resources/EXPLANATIONS.md).
 
 ## Structure
 
@@ -100,7 +106,10 @@ a file to clear the displayed invoice and findings. The servlet container may us
 files; this is not a verified memory-only deployment. Public rule resources are extracted
 to a temporary directory at startup and removed on orderly shutdown.
 
-Uploads are limited to 5 MiB on the server. DTDs, external schema hints, XInclude,
+Uploads are limited to 5 MiB on the server, for XML and PDF containers. PDF extraction
+rejects encrypted or action-bearing documents, JavaScript name trees, more than ten
+embedded files, multiple XML candidates, and embedded XML over 5 MiB; it never renders
+or executes PDF content. DTDs, external schema hints, XInclude,
 processing instructions and xml:base are rejected. XML depth, attribute and element
 counts are bounded. There is one validation worker per application instance and no
 queued jobs. A 30-second deadline returns an incomplete result; if a library ignores

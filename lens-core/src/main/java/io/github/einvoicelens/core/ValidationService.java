@@ -20,13 +20,41 @@ public final class ValidationService implements AutoCloseable {
 
     /** Takes ownership of the input stream, including on rejection or timeout. */
     public ValidationReport validate(InputStream input) {
-        return execute(input, this::safeValidation, Function.identity());
+        return execute(input, this::validateBytes, Function.identity());
     }
 
     /** Validation and reading have independent results within the same input and work limits. */
     public InvoiceAnalysis analyze(InputStream input) {
-        return execute(input, bytes -> new InvoiceAnalysis(safeValidation(bytes), new InvoiceReader().read(bytes)),
+        return execute(input, bytes -> analyzeBytes(bytes),
                 report -> new InvoiceAnalysis(report, InvoiceReading.unavailable("Invoice reading could not complete.")));
+    }
+
+    private InvoiceAnalysis analyzeBytes(byte[] bytes) {
+        if (isPdf(bytes)) {
+            try {
+                var extracted = new PdfInvoiceExtractor().extract(bytes);
+                var report = safeValidation(extracted.xml());
+                return new InvoiceAnalysis(report, new InvoiceReader().read(extracted.xml()));
+            } catch (java.io.IOException e) {
+                return new InvoiceAnalysis(ValidationReport.stopped(ValidationStatus.UNSUPPORTED, "PDF",
+                        "The PDF could not provide one safe embedded invoice XML. No invoice rules were run."),
+                        InvoiceReading.unavailable("No readable embedded invoice XML is available."));
+            }
+        }
+        return new InvoiceAnalysis(safeValidation(bytes), new InvoiceReader().read(bytes));
+    }
+
+    private ValidationReport validateBytes(byte[] bytes) {
+        if (!isPdf(bytes)) return safeValidation(bytes);
+        try { return safeValidation(new PdfInvoiceExtractor().extract(bytes).xml()); }
+        catch (java.io.IOException e) {
+            return ValidationReport.stopped(ValidationStatus.UNSUPPORTED, "PDF",
+                    "The PDF could not provide one safe embedded invoice XML. No invoice rules were run.");
+        }
+    }
+
+    private static boolean isPdf(byte[] bytes) {
+        return bytes.length >= 5 && bytes[0] == '%' && bytes[1] == 'P' && bytes[2] == 'D' && bytes[3] == 'F' && bytes[4] == '-';
     }
 
     private ValidationReport safeValidation(byte[] bytes) {
@@ -44,7 +72,7 @@ public final class ValidationService implements AutoCloseable {
                     byte[] bytes = input.readNBytes(KositInvoiceValidator.MAX_BYTES + 1);
                     if (bytes.length == 0 || bytes.length > KositInvoiceValidator.MAX_BYTES) {
                         return failure.apply(ValidationReport.stopped(ValidationStatus.INCOMPLETE, "INPUT-SIZE",
-                                "Choose a non-empty XML file of at most 5 MiB."));
+                                "Choose a non-empty XML or PDF file of at most 5 MiB."));
                     }
                     return operation.apply(bytes);
                 });

@@ -11,7 +11,9 @@ Browse files	Datei auswählen
 or drop your XML here	oder XML-Datei hier ablegen
 Your invoice	Ihre Rechnung
 Upload an XRechnung invoice (UBL or CII).	Laden Sie eine XRechnung hoch (UBL oder CII).
+Upload an XRechnung XML or a Factur-X / ZUGFeRD PDF.	Laden Sie eine XRechnung-XML oder ein Factur-X-/ZUGFeRD-PDF hoch.
 XML · up to 5 MiB	XML · bis 5 MiB
+XML or Factur-X PDF · up to 5 MiB	XML oder Factur-X-PDF · bis 5 MiB
 No invoice at hand?	Keine Rechnung zur Hand?
 Your instance. Your data.	Ihre Instanz. Ihre Daten.
 Files are checked on this instance. With remote hosting, they are sent to that server.	Dateien werden auf dieser Instanz geprüft. Bei einem entfernten Server werden sie dorthin übertragen.
@@ -55,6 +57,7 @@ Invoice rule validation was not completed.	Die Rechnungsprüfung wurde nicht vol
 Detected syntax: {0}	Erkannte Syntax: {0}
 Declared profile: {0}	Angegebenes Profil: {0}
 Validation details	Prüfdetails
+Download HTML report	HTML-Bericht herunterladen
 All checks passed. No findings to review.	Alle Prüfungen bestanden. Es liegen keine Meldungen vor.
 Findings	Meldungen
 Show findings	Meldungen anzeigen
@@ -73,6 +76,7 @@ No plain-language explanation is available for this rule yet.	Für diese Regel l
 XML location	XML-Fundstelle
 Showing the first {0} of {1} findings in this category.	Die ersten {0} von {1} Meldungen dieser Kategorie werden angezeigt.
 Choose an XML file of at most 5 MiB and try again.	Wählen Sie eine XML-Datei mit höchstens 5 MiB und versuchen Sie es erneut.
+Choose an XML or PDF file of at most 5 MiB and try again.	Wählen Sie eine XML- oder PDF-Datei mit höchstens 5 MiB und versuchen Sie es erneut.
 The sample could not be checked. Please try uploading an XML file.	Das Beispiel konnte nicht geprüft werden. Laden Sie stattdessen eine XML-Datei hoch.
 The sample could not be read.	Das Beispiel konnte nicht gelesen werden.
 Accepted by the bundled rules. Informational findings may still be present.	Von den gebündelten Regeln akzeptiert. Es können weiterhin Hinweise vorliegen.
