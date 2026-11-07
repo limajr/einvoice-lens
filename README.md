@@ -3,8 +3,8 @@
 Understand German e-invoices and their validation errors—with readable invoices,
 clear explanations, and local processing.
 
-**Status: readable invoices, explanations and bilingual UI · v0.2.1.** Upload an XRechnung XML
-or try a bundled sample. The **Invoice** tab shows parties, dates, lines, VAT,
+**Status: XRechnung XML and Factur-X / ZUGFeRD EN 16931 PDFs · v0.3.0.** Upload an
+XRechnung XML or a Factur-X / ZUGFeRD EN 16931 PDF, or try a bundled sample. The **Invoice** tab shows parties, dates, lines, VAT,
 allowances/charges, supplied totals and payment details. The **Validation** tab keeps
 rule findings, severity filters and XML locations. Where a business term has one clear
 location, a finding can jump to its invoice field. Seven reviewed DE/EN explanations
@@ -39,7 +39,7 @@ To build and run a self-contained production application:
 
 ```sh
 ./mvnw -Pproduction verify
-java -jar lens-app/target/lens-app-0.2.1.jar
+java -jar lens-app/target/lens-app-0.3.0.jar
 ```
 
 ## Try sample invoices

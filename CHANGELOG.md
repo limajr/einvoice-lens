@@ -1,5 +1,30 @@
 # Changelog
 
+## v0.3.0 — 2026-11-07
+
+### Factur-X / ZUGFeRD PDFs and shareable reports
+
+- Upload Factur-X / ZUGFeRD PDFs. The application extracts exactly one bounded embedded
+  XML invoice without rendering or executing PDF content.
+- Factur-X / ZUGFeRD EN 16931 CII (`urn:cen.eu:en16931:2017`) is checked with the pinned
+  EN 16931 CII schema and Schematron. XRechnung continues through its XRechnung path.
+  EXTENDED, BASIC, BASIC WL, MINIMUM and unknown profiles are explicitly not checkable;
+  they never receive an EN 16931 or XRechnung verdict by implication.
+- Validation details and HTML exports identify the applied rule set precisely, including
+  the EN 16931-only path without XRechnung CIUS rules.
+- Download a localized HTML report with verdict, findings, reviewed explanations and
+  suggested actions, official rule text, XML locations, profile, rule provenance, and
+  both the PDF and embedded XML filenames.
+
+### PDF security and fixtures
+
+- PDF processing has a 5 MiB upload/XML bound, ten-file attachment bound, 10 MiB shared
+  decoded-object cache cap, and rejects encryption, JavaScript actions/name trees and
+  ambiguous XML attachments. Ordinary PDF view actions remain accepted. PDF/A conformance
+  is neither checked nor claimed.
+- Added Apache-2.0 Mustang EN 16931 and Intarsys EXTENDED corpus PDFs as documented
+  manual samples. Tests verify that the former is checked and the latter is not checkable.
+
 ## v0.2.1 — 2026-10-31
 
 ### Fixed
