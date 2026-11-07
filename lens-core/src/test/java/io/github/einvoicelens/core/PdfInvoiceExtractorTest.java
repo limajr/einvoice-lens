@@ -30,11 +30,13 @@ class PdfInvoiceExtractorTest {
     }
 
     @Test void rejectsAJavaScriptOpenAction() throws Exception {
-        assertThrows(IOException.class, () -> new PdfInvoiceExtractor().extract(pdfWithJavaScriptOpenAction()));
+        var error = assertThrows(IOException.class, () -> new PdfInvoiceExtractor().extract(pdfWithJavaScriptOpenAction()));
+        assertTrue(error.getMessage().contains("JavaScript"));
     }
 
     @Test void rejectsANamedJavaScriptTree() throws Exception {
-        assertThrows(IOException.class, () -> new PdfInvoiceExtractor().extract(pdfWithNamedJavaScript()));
+        var error = assertThrows(IOException.class, () -> new PdfInvoiceExtractor().extract(pdfWithNamedJavaScript()));
+        assertTrue(error.getMessage().contains("JavaScript"));
     }
 
     private static byte[] pdf(Map<String, byte[]> attachments) throws IOException {
