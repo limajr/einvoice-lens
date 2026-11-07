@@ -1,6 +1,9 @@
 package io.github.einvoicelens.app;
 
 import io.github.einvoicelens.core.ValidationReport;
+import io.github.einvoicelens.core.*;
+import io.github.einvoicelens.explain.HtmlValidationReport;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,5 +34,13 @@ class UiTextTest {
                 de.generated("Issue date (BT-2) could not be interpreted; the original value is displayed."));
         assertEquals("Käuferreferenz (BT-10) ist mehrfach vorhanden; der erste Wert wird angezeigt.",
                 de.generated("Buyer reference (BT-10) occurs more than once; the first value is displayed."));
+    }
+    @Test void htmlReportUsesTheUiTranslationCatalog() {
+        var de = new UiText(true);
+        var report = new ValidationReport(ValidationStatus.UNSUPPORTED, "Nicht prüfbar", "CII", "", List.of(), List.of(), false);
+        String html = HtmlValidationReport.render("rechnung.pdf", "factur-x.xml", report, de.locale(), de::t);
+        assertTrue(html.contains("Rechnungsprüfbericht"));
+        assertTrue(html.contains("Eingebettetes XML"));
+        assertTrue(html.contains("aus PDF"));
     }
 }

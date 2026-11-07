@@ -5,7 +5,7 @@ Start with **[valid-standard-ubl.xml](valid-standard-ubl.xml)** or
 <http://localhost:8080>, then upload a file from this folder. Use **Choose another file** or remove the current file before trying the next one.
 
 These are public test examples, not invoices for payment. `cii` in these filenames
-corresponds to `uncefact` in the upstream fixture names. All files are standard
+corresponds to `uncefact` in the upstream fixture names. The XML files are standard
 XRechnung 3.0 XML, including the deliberately invalid variants.
 
 The **Invoice** tab now shows the same files as readable invoices, including invalid
@@ -34,7 +34,10 @@ The comprehensive CII example intentionally demonstrates accepted-with-warnings 
 
 The comprehensive files contain repeated groups and embedded attachments, useful for
 future invoice-view testing. They do not individually cover every business term.
-This folder currently contains XML only; ZUGFeRD/Factur-X PDFs are planned for v0.2.
+Two redistributable Apache-2.0 PDF test examples exercise the hybrid upload path: the Mustang
+EN 16931 example is checked with the pinned EN 16931 rules; the Intarsys EXTENDED
+example is intentionally reported as **not checkable**, rather than incorrectly applying
+EN 16931 rules to its extension profile. Neither result asserts PDF/A conformance.
 
 ## Origin and license
 
@@ -49,6 +52,9 @@ For checksums, original upstream paths, mutation details and reproduction instru
 see the [fixture manifest](../lens-core/src/test/resources/samples/manifest.json) and
 [fixture sources](../lens-core/src/test/resources/samples/SOURCES.md).
 
+The two PDF examples are byte-for-byte copies from the [ZUGFeRD corpus](https://github.com/ZUGFeRD/corpus),
+also Apache-2.0, pinned at commit `82e886fb21369e3e83c1e97170a4ff406deceee7`.
+
 | Manual sample | Canonical test fixture |
 | --- | --- |
 | `valid-standard-cii.xml` | [kosit/business-cases/standard/01.01a-INVOICE_uncefact.xml](../lens-core/src/test/resources/samples/kosit/business-cases/standard/01.01a-INVOICE_uncefact.xml) |
@@ -61,6 +67,8 @@ see the [fixture manifest](../lens-core/src/test/resources/samples/manifest.json
 | `invalid-incorrect-total-ubl.xml` | [derived/incorrect-bt-112-ubl.xml](../lens-core/src/test/resources/samples/derived/incorrect-bt-112-ubl.xml) |
 | `invalid-missing-buyer-reference-cii.xml` | [derived/missing-bt-10-uncefact.xml](../lens-core/src/test/resources/samples/derived/missing-bt-10-uncefact.xml) |
 | `invalid-missing-buyer-reference-ubl.xml` | [derived/missing-bt-10-ubl.xml](../lens-core/src/test/resources/samples/derived/missing-bt-10-ubl.xml) |
+| `factur-x-en16931-mustang.pdf` | [Mustang example PDF](https://github.com/ZUGFeRD/corpus/blob/master/ZUGFeRDv2/correct/Mustangproject/MustangGnuaccountingBeispielRE-20201121_508.pdf), SHA-256 `ed0291114a1dae7070fb6c242e217705edccbefc006c750a79e028ddd99ccdb6` |
+| `zugferd-extended-intarsys.pdf` | [Intarsys EXTENDED example PDF](https://github.com/ZUGFeRD/corpus/blob/master/ZUGFeRDv2/correct/intarsys/EXTENDED/zugferd_2p0_EXTENDED_Warenrechnung.pdf), SHA-256 `a2780c73aa532cd1983fef64e1445bcaf1a6dd64f3233b946a13e957de22b69c` |
 
 When updating a canonical fixture, refresh its copy here and review the expected verdict
 and rules above against the pinned configuration. Keep personal experiments outside this

@@ -10,7 +10,7 @@ class HtmlValidationReportTest {
     @Test void escapesSupplierControlledValuesAndIncludesRuleProvenance() {
         var report = new ValidationReport(ValidationStatus.INVALID, "Rejected <now>", "CII", "profile", List.of(
                 new Finding("BR-DE-15", Finding.Severity.ERROR, "Rule says <fix>", "/x")), List.of(), true);
-        String html = HtmlValidationReport.render("<invoice>.xml", report, Locale.UK);
+        String html = HtmlValidationReport.render("<invoice>.xml", "", report, Locale.UK, key -> key);
         assertTrue(html.contains("&lt;invoice&gt;.xml"));
         assertTrue(html.contains("Rule says &lt;fix&gt;"));
         assertTrue(html.contains(KositInvoiceValidator.BUNDLE_ID));

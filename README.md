@@ -107,9 +107,10 @@ files; this is not a verified memory-only deployment. Public rule resources are 
 to a temporary directory at startup and removed on orderly shutdown.
 
 Uploads are limited to 5 MiB on the server, for XML and PDF containers. PDF extraction
-rejects encrypted or action-bearing documents, JavaScript name trees, more than ten
-embedded files, multiple XML candidates, and embedded XML over 5 MiB; it never renders
-or executes PDF content. DTDs, external schema hints, XInclude,
+rejects encrypted documents, JavaScript document actions or name trees, more than ten
+embedded files, multiple XML candidates, and embedded XML over 5 MiB. PDFBox uses an
+in-memory 10 MiB decoded-object cache in addition to the 5 MiB upload bound; it never
+renders or executes PDF content. DTDs, external schema hints, XInclude,
 processing instructions and xml:base are rejected. XML depth, attribute and element
 counts are bounded. There is one validation worker per application instance and no
 queued jobs. A 30-second deadline returns an incomplete result; if a library ignores

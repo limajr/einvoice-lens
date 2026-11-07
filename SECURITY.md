@@ -9,8 +9,9 @@ repository. If unavailable, open an issue requesting a private contact without t
 details or attachments. No supported production release exists yet.
 
 Validation uses a 5 MiB file limit, hardened XML preflight, and PDF extraction that rejects
-encrypted or action-bearing PDFs, JavaScript name trees, excess attachments and ambiguous
-XML attachments. It does not render PDFs or execute their content. There is no input-driven external
+encrypted PDFs, JavaScript document actions/name trees, excess attachments and ambiguous
+XML attachments. PDFBox parsing has a 10 MiB decoded-object in-memory cache limit; extraction
+never renders PDFs or executes their content. There is no input-driven external
 schema resolution, one worker, no queue and a 30-second response deadline. A timed-out
 library task may continue until it honors interruption or finishes, retaining the worker
 slot; process isolation is not implemented. Do not expose this preview as a public upload

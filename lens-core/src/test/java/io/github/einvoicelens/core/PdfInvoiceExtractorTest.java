@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.common.filespecification.*;
+import org.apache.pdfbox.pdmodel.interactive.documentnavigation.destination.PDPageFitDestination;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,8 +23,22 @@ class PdfInvoiceExtractorTest {
                 "other.xml", "<invoice/>".getBytes(StandardCharsets.UTF_8)))));
     }
 
+    @Test void permitsANonScriptOpenViewAction() throws Exception {
+        var extracted = new PdfInvoiceExtractor().extract(pdf(Map.of("factur-x.xml", "<invoice/>".getBytes(StandardCharsets.UTF_8)), true));
+        assertEquals("factur-x.xml", extracted.name());
+    }
+
     private static byte[] pdf(Map<String, byte[]> attachments) throws IOException {
+        return pdf(attachments, false);
+    }
+    private static byte[] pdf(Map<String, byte[]> attachments, boolean openAtFirstPage) throws IOException {
         try (var document = new PDDocument(); var output = new ByteArrayOutputStream()) {
+            if (openAtFirstPage) {
+                document.addPage(new PDPage());
+                var destination = new PDPageFitDestination();
+                destination.setPage(document.getPage(0));
+                document.getDocumentCatalog().setOpenAction(destination);
+            }
             var files = new PDEmbeddedFilesNameTreeNode();
             var entries = new java.util.HashMap<String, PDComplexFileSpecification>();
             for (var attachment : attachments.entrySet()) {

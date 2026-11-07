@@ -58,6 +58,24 @@ Detected syntax: {0}	Erkannte Syntax: {0}
 Declared profile: {0}	Angegebenes Profil: {0}
 Validation details	Prüfdetails
 Download HTML report	HTML-Bericht herunterladen
+Invoice validation report	Rechnungsprüfbericht
+Verdict	Prüfurteil
+File	Datei
+Embedded XML	Eingebettetes XML
+from PDF	aus PDF
+Validation scope	Prüfumfang
+Syntax	Syntax
+Rules	Regeln
+Bundle provenance	Bundle-Herkunft
+Not checkable	Nicht prüfbar
+Not declared	Nicht angegeben
+No rule verdict was produced.	Es wurde kein Regelurteil erstellt.
+This report does not establish PDF/A conformance, authenticity, payment safety, or complete tax/legal compliance.	Dieser Bericht bestätigt keine PDF/A-Konformität, Echtheit, Zahlungssicherheit oder vollständige steuerliche bzw. rechtliche Konformität.
+This Factur-X / ZUGFeRD profile is not checkable with the bundled rules. No invoice rules were run.	Dieses Factur-X-/ZUGFeRD-Profil ist mit den gebündelten Regeln nicht prüfbar. Es wurden keine Rechnungsregeln ausgeführt.
+Only standard XRechnung 3.0 and Factur-X / ZUGFeRD EN 16931 XML are checkable. No invoice rules were run.	Prüfbar sind nur Standard-XRechnung 3.0 und Factur-X-/ZUGFeRD-EN-16931-XML. Es wurden keine Rechnungsregeln ausgeführt.
+No findings were reported.	Es wurden keine Meldungen ausgegeben.
+Application message	Anwendungsmeldung
+Official rule	Offizielle Regel
 All checks passed. No findings to review.	Alle Prüfungen bestanden. Es liegen keine Meldungen vor.
 Findings	Meldungen
 Show findings	Meldungen anzeigen

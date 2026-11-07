@@ -215,7 +215,7 @@ public class InvoiceView extends Div {
             } catch (Exception e) {
                 return new InvoiceAnalysis(ValidationReport.stopped(ValidationStatus.INCOMPLETE, "SAMPLE",
                         "The sample could not be checked. Please try uploading an XML file."),
-                        InvoiceReading.unavailable("The sample could not be read."));
+                        InvoiceReading.unavailable("The sample could not be read."), "");
             }
         }).thenAccept(report -> {
             if (ui.isAttached()) ui.access(() -> { if (request.get() == id) show(sample.displayName(), report); });
@@ -343,7 +343,7 @@ public class InvoiceView extends Div {
         validation.add(technical);
 
         var resource = new StreamResource("validation-report.html", () -> new ByteArrayInputStream(
-                HtmlValidationReport.render(fileName, report, ui.locale()).getBytes(StandardCharsets.UTF_8)));
+                HtmlValidationReport.render(fileName, analysis.embeddedFileName(), report, ui.locale(), ui::t).getBytes(StandardCharsets.UTF_8)));
         var export = new Anchor(resource, ui.t("Download HTML report"));
         export.getElement().setAttribute("download", true);
         export.addClassName("report-export");

@@ -1,6 +1,8 @@
 package io.github.einvoicelens.core;
 
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -68,15 +70,39 @@ class KositInvoiceValidatorTest {
         assertTrue(result.findings().isEmpty());
     }
 
-    @Test void facturxEn16931UsesOnlyThePinnedEuropeanRules() throws Exception {
+    @Test void en16931CiiUsesOnlyThePinnedEuropeanRules() throws Exception {
         String cii = new String(sample("kosit/business-cases/standard/01.01a-INVOICE_uncefact.xml"), StandardCharsets.UTF_8)
-                .replace(XmlPreflight.PROFILE, "urn:factur-x.eu:1p0:en16931");
+                .replace(XmlPreflight.PROFILE, "urn:cen.eu:en16931:2017");
         var result = validate(cii);
         assertNotEquals(ValidationStatus.UNSUPPORTED, result.status(), result.toString());
         assertTrue(result.rulesApplied());
         assertEquals(3, result.checks().size());
-        assertEquals("urn:factur-x.eu:1p0:en16931", result.declaredProfile());
+        assertEquals("urn:cen.eu:en16931:2017", result.declaredProfile());
     }
+
+    @Test void extendedFacturxIsNotMisrepresentedAsAnEn16931Check() throws Exception {
+        String cii = new String(sample("kosit/business-cases/standard/01.01a-INVOICE_uncefact.xml"), StandardCharsets.UTF_8)
+                .replace(XmlPreflight.PROFILE, "urn:cen.eu:en16931:2017#conformant#urn:factur-x.eu:1p0:extended");
+        var result = validate(cii);
+        assertEquals(ValidationStatus.UNSUPPORTED, result.status());
+        assertFalse(result.rulesApplied());
+        assertTrue(result.summary().contains("not checkable"));
+    }
+
+    @Test void bundledFacturxPdfExamplesExerciseEn16931AndExtendedProfileHandling() throws Exception {
+        var extractor = new PdfInvoiceExtractor();
+        byte[] en16931 = extractor.extract(Files.readAllBytes(samplePdf("factur-x-en16931-mustang.pdf"))).xml();
+        var valid = validator.validate(en16931);
+        assertTrue(valid.rulesApplied(), valid.toString());
+        assertEquals("urn:cen.eu:en16931:2017", valid.declaredProfile());
+
+        byte[] extended = extractor.extract(Files.readAllBytes(samplePdf("zugferd-extended-intarsys.pdf"))).xml();
+        var unsupported = validator.validate(extended);
+        assertEquals(ValidationStatus.UNSUPPORTED, unsupported.status());
+        assertFalse(unsupported.rulesApplied());
+    }
+
+    private static Path samplePdf(String name) { return Path.of("..", "Sample", name); }
 
     @Test void arbitraryXmlIsUnsupported() {
         assertEquals(ValidationStatus.UNSUPPORTED, validate("<invoice/>").status());

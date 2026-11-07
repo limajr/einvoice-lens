@@ -26,7 +26,7 @@ public final class ValidationService implements AutoCloseable {
     /** Validation and reading have independent results within the same input and work limits. */
     public InvoiceAnalysis analyze(InputStream input) {
         return execute(input, bytes -> analyzeBytes(bytes),
-                report -> new InvoiceAnalysis(report, InvoiceReading.unavailable("Invoice reading could not complete.")));
+                report -> new InvoiceAnalysis(report, InvoiceReading.unavailable("Invoice reading could not complete."), ""));
     }
 
     private InvoiceAnalysis analyzeBytes(byte[] bytes) {
@@ -34,14 +34,14 @@ public final class ValidationService implements AutoCloseable {
             try {
                 var extracted = new PdfInvoiceExtractor().extract(bytes);
                 var report = safeValidation(extracted.xml());
-                return new InvoiceAnalysis(report, new InvoiceReader().read(extracted.xml()));
+                return new InvoiceAnalysis(report, new InvoiceReader().read(extracted.xml()), extracted.name());
             } catch (java.io.IOException e) {
                 return new InvoiceAnalysis(ValidationReport.stopped(ValidationStatus.UNSUPPORTED, "PDF",
                         "The PDF could not provide one safe embedded invoice XML. No invoice rules were run."),
-                        InvoiceReading.unavailable("No readable embedded invoice XML is available."));
+                        InvoiceReading.unavailable("No readable embedded invoice XML is available."), "");
             }
         }
-        return new InvoiceAnalysis(safeValidation(bytes), new InvoiceReader().read(bytes));
+        return new InvoiceAnalysis(safeValidation(bytes), new InvoiceReader().read(bytes), "");
     }
 
     private ValidationReport validateBytes(byte[] bytes) {
