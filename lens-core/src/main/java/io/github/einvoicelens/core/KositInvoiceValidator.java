@@ -17,6 +17,7 @@ public final class KositInvoiceValidator implements InvoiceValidator, AutoClosea
     public static final String BUNDLE_ID = "3.0.2-2026-08-31";
     public static final String ENGINE = "KoSIT Validator 1.6.3";
     public static final String RULES = "XRechnung 3.0.2 · KoSIT configuration of 2026-08-31 · EN 16931 1.3.16";
+    public static final String EN16931_CII_RULES = "EN 16931 (CII) 1.3.16 from bundle 3.0.2 / 2026-08-31 · without XRechnung CIUS";
     private static final String REPORT_NS = "http://www.xoev.de/de/validator/varl/1";
     private final BundledRules rules;
     private final DefaultCheck check;
@@ -75,7 +76,7 @@ public final class KositInvoiceValidator implements InvoiceValidator, AutoClosea
             return new ValidationReport(ValidationStatus.UNSUPPORTED,
                     facturx ? "This Factur-X / ZUGFeRD profile is not checkable with the bundled rules. No invoice rules were run."
                             : "Only standard XRechnung 3.0 and Factur-X / ZUGFeRD EN 16931 XML are checkable. No invoice rules were run.",
-                    detected.syntax(), detected.profile(), List.of(), List.of(), false);
+                    detected.syntax(), detected.profile(), "", List.of(), List.of(), false);
         }
         try {
             var result = (en16931 ? facturxEn16931Check : check).checkInput(InputFactory.read(xml, "invoice.xml"));
@@ -129,7 +130,7 @@ public final class KositInvoiceValidator implements InvoiceValidator, AutoClosea
                 case VALID_WITH_WARNINGS -> "Accepted by the bundled rules, with warnings to review.";
                 case INVALID -> "The document was rejected by the bundled rules. Review the findings below.";
                 default -> "Some checks did not complete. No valid verdict is available.";
-            }, detected.syntax(), detected.profile(), findings, checks, true);
+            }, detected.syntax(), detected.profile(), en16931 ? EN16931_CII_RULES : RULES, findings, checks, true);
         } catch (RuntimeException e) {
             return ValidationReport.stopped(ValidationStatus.INCOMPLETE, "VALIDATOR", "Validation could not complete. No valid verdict is available.");
         }

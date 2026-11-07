@@ -33,7 +33,7 @@ public final class HtmlValidationReport {
                 .append(escape(translate.apply("Syntax"))).append(": ").append(escape(report.syntax())).append("<br>")
                 .append(escape(translate.apply("Declared profile"))).append(": ")
                 .append(escape(report.declaredProfile().isBlank() ? translate.apply("Not declared") : report.declaredProfile())).append("<br>");
-        if (report.rulesApplied()) html.append(escape(translate.apply("Rules"))).append(": ").append(escape(KositInvoiceValidator.RULES)).append("<br>")
+        if (report.rulesApplied()) html.append(escape(translate.apply("Rules"))).append(": ").append(escape(report.appliedRuleSet())).append("<br>")
                 .append(escape(translate.apply("Bundle provenance"))).append(": ")
                 .append(escape(KositInvoiceValidator.BUNDLE_ID)).append("; ").append(escape(KositInvoiceValidator.ENGINE));
         else html.append(escape(translate.apply("No rule verdict was produced.")));

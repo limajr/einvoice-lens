@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HtmlValidationReportTest {
     @Test void escapesSupplierControlledValuesAndIncludesRuleProvenance() {
-        var report = new ValidationReport(ValidationStatus.INVALID, "Rejected <now>", "CII", "profile", List.of(
+        var report = new ValidationReport(ValidationStatus.INVALID, "Rejected <now>", "CII", "profile", "Rule set", List.of(
                 new Finding("BR-DE-15", Finding.Severity.ERROR, "Rule says <fix>", "/x")), List.of(), true);
         String html = HtmlValidationReport.render("<invoice>.xml", "", report, Locale.UK, key -> key);
         assertTrue(html.contains("&lt;invoice&gt;.xml"));

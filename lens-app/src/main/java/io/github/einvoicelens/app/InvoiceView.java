@@ -337,7 +337,7 @@ public class InvoiceView extends Div {
         metadata.addClassName("validation-metadata");
         metadata.add(paragraph(ui.format("Detected syntax: {0}", ui.t(report.syntax())), "small"));
         if (!report.declaredProfile().isBlank()) metadata.add(rawParagraph(ui.format("Declared profile: {0}", report.declaredProfile()), "small code-path"));
-        if (report.rulesApplied()) metadata.add(paragraph(KositInvoiceValidator.ENGINE, "small"), paragraph(KositInvoiceValidator.RULES, "small"));
+        if (report.rulesApplied()) metadata.add(paragraph(KositInvoiceValidator.ENGINE, "small"), paragraph(report.appliedRuleSet(), "small"));
         var technical = new Details(ui.t("Validation details"), metadata);
         technical.addClassName("technical-details");
         validation.add(technical);

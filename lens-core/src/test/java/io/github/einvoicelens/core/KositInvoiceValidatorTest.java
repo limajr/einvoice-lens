@@ -78,6 +78,7 @@ class KositInvoiceValidatorTest {
         assertTrue(result.rulesApplied());
         assertEquals(3, result.checks().size());
         assertEquals("urn:cen.eu:en16931:2017", result.declaredProfile());
+        assertEquals(KositInvoiceValidator.EN16931_CII_RULES, result.appliedRuleSet());
     }
 
     @Test void extendedFacturxIsNotMisrepresentedAsAnEn16931Check() throws Exception {

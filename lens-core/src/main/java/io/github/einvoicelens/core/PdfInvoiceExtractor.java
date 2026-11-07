@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.io.RandomAccessReadBuffer;
 import org.apache.pdfbox.io.RandomAccessReadWriteBuffer;
@@ -78,20 +79,30 @@ final class PdfInvoiceExtractor {
 
     /** Caps PDFBox's decoded object-stream cache independently of the compressed upload bound. */
     private static final class BoundedRandomAccessBuffer extends RandomAccessReadWriteBuffer {
-        private final long limit;
-        BoundedRandomAccessBuffer(long limit) { this.limit = limit; }
-        @Override public void write(int value) throws IOException { check(1); super.write(value); }
-        @Override public void write(byte[] bytes) throws IOException { check(bytes.length); super.write(bytes); }
-        @Override public void write(byte[] bytes, int offset, int length) throws IOException { check(length); super.write(bytes, offset, length); }
-        private void check(int bytes) throws IOException {
-            if (length() > limit - bytes) throw new IOException("PDF decoded-data limit exceeded");
+        private final BoundedStreamCache cache;
+        BoundedRandomAccessBuffer(BoundedStreamCache cache) { this.cache = cache; }
+        @Override public void write(int value) throws IOException { cache.reserve(1); super.write(value); }
+        @Override public void write(byte[] bytes) throws IOException { cache.reserve(bytes.length); super.write(bytes, 0, bytes.length); }
+        @Override public void write(byte[] bytes, int offset, int length) throws IOException { cache.reserve(length); super.write(bytes, offset, length); }
+        @Override public void clear() throws IOException {
+            cache.release(length());
+            super.clear();
         }
     }
 
     private static final class BoundedStreamCache implements RandomAccessStreamCache {
         private final long limit;
+        private final AtomicLong allocated = new AtomicLong();
         BoundedStreamCache(long limit) { this.limit = limit; }
-        @Override public RandomAccess createBuffer() { return new BoundedRandomAccessBuffer(limit); }
+        @Override public RandomAccess createBuffer() { return new BoundedRandomAccessBuffer(this); }
         @Override public void close() { }
+        void reserve(long bytes) throws IOException {
+            long prior;
+            do {
+                prior = allocated.get();
+                if (bytes < 0 || prior > limit - bytes) throw new IOException("PDF decoded-data limit exceeded");
+            } while (!allocated.compareAndSet(prior, prior + bytes));
+        }
+        void release(long bytes) { allocated.addAndGet(-bytes); }
     }
 }

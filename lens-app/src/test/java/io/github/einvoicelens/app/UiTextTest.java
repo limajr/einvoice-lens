@@ -37,7 +37,7 @@ class UiTextTest {
     }
     @Test void htmlReportUsesTheUiTranslationCatalog() {
         var de = new UiText(true);
-        var report = new ValidationReport(ValidationStatus.UNSUPPORTED, "Nicht prüfbar", "CII", "", List.of(), List.of(), false);
+        var report = new ValidationReport(ValidationStatus.UNSUPPORTED, "Nicht prüfbar", "CII", "", "", List.of(), List.of(), false);
         String html = HtmlValidationReport.render("rechnung.pdf", "factur-x.xml", report, de.locale(), de::t);
         assertTrue(html.contains("Rechnungsprüfbericht"));
         assertTrue(html.contains("Eingebettetes XML"));
