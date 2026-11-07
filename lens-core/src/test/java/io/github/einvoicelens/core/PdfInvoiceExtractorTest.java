@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.common.filespecification.*;
+import org.apache.pdfbox.pdmodel.interactive.action.PDActionJavaScript;
 import org.apache.pdfbox.pdmodel.interactive.documentnavigation.destination.PDPageFitDestination;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,6 +27,14 @@ class PdfInvoiceExtractorTest {
     @Test void permitsANonScriptOpenViewAction() throws Exception {
         var extracted = new PdfInvoiceExtractor().extract(pdf(Map.of("factur-x.xml", "<invoice/>".getBytes(StandardCharsets.UTF_8)), true));
         assertEquals("factur-x.xml", extracted.name());
+    }
+
+    @Test void rejectsAJavaScriptOpenAction() throws Exception {
+        assertThrows(IOException.class, () -> new PdfInvoiceExtractor().extract(pdfWithJavaScriptOpenAction()));
+    }
+
+    @Test void rejectsANamedJavaScriptTree() throws Exception {
+        assertThrows(IOException.class, () -> new PdfInvoiceExtractor().extract(pdfWithNamedJavaScript()));
     }
 
     private static byte[] pdf(Map<String, byte[]> attachments) throws IOException {
@@ -56,5 +65,40 @@ class PdfInvoiceExtractorTest {
             document.save(output);
             return output.toByteArray();
         }
+    }
+
+    private static byte[] pdfWithJavaScriptOpenAction() throws IOException {
+        try (var document = new PDDocument(); var output = new ByteArrayOutputStream()) {
+            document.getDocumentCatalog().setOpenAction(new PDActionJavaScript("app.alert('never execute')"));
+            addInvoiceAttachment(document);
+            document.save(output);
+            return output.toByteArray();
+        }
+    }
+
+    private static byte[] pdfWithNamedJavaScript() throws IOException {
+        try (var document = new PDDocument(); var output = new ByteArrayOutputStream()) {
+            var names = new PDDocumentNameDictionary(document.getDocumentCatalog());
+            var scripts = new PDJavascriptNameTreeNode();
+            scripts.setNames(Map.of("evil", new PDActionJavaScript("app.alert('never execute')")));
+            names.setJavascript(scripts);
+            document.getDocumentCatalog().setNames(names);
+            addInvoiceAttachment(document);
+            document.save(output);
+            return output.toByteArray();
+        }
+    }
+
+    private static void addInvoiceAttachment(PDDocument document) throws IOException {
+        var files = new PDEmbeddedFilesNameTreeNode();
+        var specification = new PDComplexFileSpecification();
+        specification.setFile("factur-x.xml");
+        var data = "<invoice/>".getBytes(StandardCharsets.UTF_8);
+        specification.setEmbeddedFile(new PDEmbeddedFile(document, new ByteArrayInputStream(data)));
+        files.setNames(Map.of("factur-x.xml", specification));
+        var names = document.getDocumentCatalog().getNames();
+        if (names == null) names = new PDDocumentNameDictionary(document.getDocumentCatalog());
+        names.setEmbeddedFiles(files);
+        document.getDocumentCatalog().setNames(names);
     }
 }

@@ -80,13 +80,28 @@ final class PdfInvoiceExtractor {
     /** Caps PDFBox's decoded object-stream cache independently of the compressed upload bound. */
     private static final class BoundedRandomAccessBuffer extends RandomAccessReadWriteBuffer {
         private final BoundedStreamCache cache;
+        private long reserved;
         BoundedRandomAccessBuffer(BoundedStreamCache cache) { this.cache = cache; }
-        @Override public void write(int value) throws IOException { cache.reserve(1); super.write(value); }
-        @Override public void write(byte[] bytes) throws IOException { cache.reserve(bytes.length); super.write(bytes, 0, bytes.length); }
-        @Override public void write(byte[] bytes, int offset, int length) throws IOException { cache.reserve(length); super.write(bytes, offset, length); }
+        @Override public void write(int value) throws IOException { reserve(1); super.write(value); }
+        @Override public void write(byte[] bytes) throws IOException { reserve(bytes.length); super.write(bytes, 0, bytes.length); }
+        @Override public void write(byte[] bytes, int offset, int length) throws IOException { reserve(length); super.write(bytes, offset, length); }
         @Override public void clear() throws IOException {
-            cache.release(length());
             super.clear();
+            releaseReserved();
+        }
+        @Override public void close() throws IOException {
+            try { super.close(); }
+            finally { releaseReserved(); }
+        }
+        private void reserve(long bytes) throws IOException {
+            cache.reserve(bytes);
+            reserved += bytes;
+        }
+        private void releaseReserved() {
+            if (reserved > 0) {
+                cache.release(reserved);
+                reserved = 0;
+            }
         }
     }
 
