@@ -10,11 +10,14 @@ rule findings, severity filters and XML locations. Where a business term has one
 location, a finding can jump to its invoice field. Seven reviewed DE/EN explanations
 cover the current sample findings, including missing buyer references and inconsistent
 totals. The unchanged official rule text remains expandable below each explanation.
-Unknown rules fall back explicitly. Report export remains planned.
+Unknown rules fall back explicitly. Download a localized HTML report to share the verdict,
+findings, explanations and rule provenance with a supplier.
 
 ![Validation view showing a missing buyer reference, a plain-language explanation, suggested action and the original official rule text](docs/images/validation-preview.jpg)
 
 *The bundled invalid sample: understand the finding and see what to correct.*
+
+![Factur-X PDF validated against EN 16931, with the applied rule set shown in the validation details](docs/images/zugferd-validation-preview.jpg)
 
 ## Run locally
 

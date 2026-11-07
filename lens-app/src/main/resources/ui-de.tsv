@@ -9,6 +9,7 @@ Try with a sample invoice	Mit einer Beispielrechnung testen
 Try an invalid example	Ungültiges Beispiel testen
 Browse files	Datei auswählen
 or drop your XML here	oder XML-Datei hier ablegen
+or drop your file here	oder Datei hier ablegen
 Your invoice	Ihre Rechnung
 Upload an XRechnung invoice (UBL or CII).	Laden Sie eine XRechnung hoch (UBL oder CII).
 Upload an XRechnung XML or a Factur-X / ZUGFeRD PDF.	Laden Sie eine XRechnung-XML oder ein Factur-X-/ZUGFeRD-PDF hoch.
@@ -119,6 +120,7 @@ Not determined	Nicht ermittelt
 Unknown	Unbekannt
 UBL Invoice	UBL-Rechnung
 XRechnung 3.0.2 · KoSIT configuration of 2026-08-31 · EN 16931 1.3.16	XRechnung 3.0.2 · KoSIT-Konfiguration vom 31.08.2026 · EN 16931 1.3.16
+EN 16931 (CII) 1.3.16 from bundle 3.0.2 / 2026-08-31 · without XRechnung CIUS	EN 16931 (CII) 1.3.16 aus Bundle 3.0.2 / 2026-08-31 · ohne XRechnung-CIUS
 Display format	Anzeigeformat
 Formats amounts and dates; the language selector controls labels.	Formatiert Beträge und Datumsangaben; die Sprachauswahl steuert die Bezeichnungen.
 INVOICE	RECHNUNG

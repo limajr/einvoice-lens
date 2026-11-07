@@ -54,6 +54,8 @@ public class InvoiceView extends Div {
     private String invoiceFormat = "English";
     private final Button validSample = new Button("Try with a sample invoice");
     private final Button invalidSample = new Button("Try an invalid example");
+    private Span ruleSetPill;
+    private Tooltip ruleSetTooltip;
 
     public InvoiceView(ValidationService service, ObjectProvider<BuildProperties> buildProperties,
                        @Value("${lens.repository-url}") String repositoryUrl) {
@@ -64,16 +66,16 @@ public class InvoiceView extends Div {
         var wordmark = new Div();
         wordmark.addClassName("wordmark");
         wordmark.add(symbol("el", "brand-mark"), text("einvoice", "brand-name"), text("lens", "brand-accent"));
-        var versionPill = text("XRechnung 3.0", "header-tag");
-        versionPill.getElement().setAttribute("tabindex", "0");
-        var versionTooltip = Tooltip.forComponent(versionPill).withText(KositInvoiceValidator.RULES).withFocusDelay(0);
-        staticBindings.add(() -> versionTooltip.setText(ui.t(KositInvoiceValidator.RULES)));
+        ruleSetPill = text("KoSIT 3.0.2", "header-tag");
+        ruleSetPill.getElement().setAttribute("tabindex", "0");
+        ruleSetTooltip = Tooltip.forComponent(ruleSetPill).withText(KositInvoiceValidator.RULES).withFocusDelay(0);
+        staticBindings.add(() -> ruleSetTooltip.setText(ui.t(KositInvoiceValidator.RULES)));
         var language = new Select<String>();
         language.setItems("English", "Deutsch"); language.setValue("English");
         language.addClassName("ui-language");
         staticBindings.add(() -> language.setLabel(ui.t("Language")));
         language.addValueChangeListener(event -> changeLanguage(event.getValue()));
-        var headerControls = new Div(language, versionPill); headerControls.addClassName("header-controls");
+        var headerControls = new Div(language, ruleSetPill); headerControls.addClassName("header-controls");
         var header = new Header(wordmark, headerControls);
         header.addClassName("site-header");
         var hero = new Div(text("A LITTLE CLARITY GOES A LONG WAY", "eyebrow"),
@@ -111,7 +113,7 @@ public class InvoiceView extends Div {
         bindButton(browse, "Browse files");
         browse.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         upload.setUploadButton(browse);
-        upload.setDropLabel(text("or drop your XML here", "drop-label-text"));
+        upload.setDropLabel(text("or drop your file here", "drop-label-text"));
         upload.setDropLabelIcon(symbol("↑", "upload-arrow"));
         upload.addFileRemovedListener(event -> reset());
         upload.addFileRejectedListener(event -> clearWithMessage(event.getErrorMessage()));
@@ -181,7 +183,7 @@ public class InvoiceView extends Div {
     private void updateUploadLanguage() {
         upload.setI18n(new UploadI18N()
                 .setAddFiles(new UploadI18N.AddFiles().setOne(ui.t("Browse files")).setMany(ui.t("Browse files")))
-                .setDropFiles(new UploadI18N.DropFiles().setOne(ui.t("or drop your XML here")).setMany(ui.t("or drop your XML here")))
+                .setDropFiles(new UploadI18N.DropFiles().setOne(ui.t("or drop your file here")).setMany(ui.t("or drop your file here")))
                 .setFile(new UploadI18N.File().setRemove(ui.t("Remove")).setRetry(ui.t("Retry")).setStart(ui.t("Start")))
                 .setError(new UploadI18N.Error().setTooManyFiles(ui.t("Too many files.")).setFileIsTooBig(ui.t("File is too large.")).setIncorrectFileType(ui.t("Incorrect file type.")))
                 .setUploading(new UploadI18N.Uploading()
@@ -274,6 +276,7 @@ public class InvoiceView extends Div {
     private void show(String fileName, InvoiceAnalysis analysis) {
         currentAnalysis = analysis; currentFileName = fileName; loadingFile = null; uploadError = null;
         var report = analysis.validation();
+        ruleSetTooltip.setText(ui.t(report.rulesApplied() ? report.appliedRuleSet() : KositInvoiceValidator.RULES));
         enableSamples();
         results.removeAll();
         clear.setVisible(true);
